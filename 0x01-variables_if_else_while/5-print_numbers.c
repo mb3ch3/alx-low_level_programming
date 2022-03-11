@@ -9,9 +9,7 @@
  */
 
 int main(void)
-
 {
-
 	char c = '0';
 	
 	while (c <= '9')
@@ -19,8 +17,6 @@ int main(void)
 		putchar(c);
 		c++;
 	}
-
 	putchar('\n');
 	return (0);
-
 }
