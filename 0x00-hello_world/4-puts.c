@@ -1,12 +1,18 @@
-include <stdio.h>
+#include <stdio.h>
+
+
 
 /**
  *
- *  * main - main block
+ *  * main - Entry point
  *
- *   * Return: always 0 (success)
+ *   * Description: prints ""Programming is like building a multilingual puzzle\n"
  *
- *    */
+ *    * Return: 0
+ *
+ *     */
+
+
 
 int main(void)
 
