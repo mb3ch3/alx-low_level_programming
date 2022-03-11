@@ -11,10 +11,8 @@
 int main(void)
 
 {
-	int n=0;
-
 	srand(time(0));
-	n = rand() - RAND_MAX / 2;
+	int n = rand() - RAND_MAX / 2;
 	return (0);
 
 }
