@@ -8,9 +8,7 @@
 void print_triangle(int size)
 {
 	int c, i, j;
-
 	c = 0;
-
 	i = size - 1;
 
 	while (c < size)
@@ -29,12 +27,9 @@ void print_triangle(int size)
 			_putchar('#');
 			j--;
 		}
-
 		_putchar('\n');
-	
 		c++;
 	}
-	
 	if (size <= 0)
 		_putchar('\n');
 }
