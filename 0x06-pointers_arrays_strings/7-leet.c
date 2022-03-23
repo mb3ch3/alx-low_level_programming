@@ -14,9 +14,7 @@
 char *leet(char *s)
 {
 	int stringCount, leetCount;
-
 	char leetLetters[] = "aAeEoOtTlL";
-
 	char leetNums[] = "4433007711";
 
 	stringCount = 0;
@@ -31,13 +29,10 @@ char *leet(char *s)
 			{
 				s[stringCount] = leetNums[leetCount];
 			}
-																			leetCount++;
-
+			
+			leetCount++;
 		}
-
-	stringCount++;
-
+		stringCount++;
 	}
-
 	return (s);
 }
