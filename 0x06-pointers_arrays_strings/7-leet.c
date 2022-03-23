@@ -13,28 +13,20 @@
 
 char *leet(char *s)
 {
-	int stringCount, leetCount;
+	int i, j;
 
-	char leetLetters[] = "aAeEoOtTlL";
+	char subs[] = "aAeEoOtTlL";
 
-	char leetNums[] = "4433007711";
+	char le[] = "43071";
 
-	stringCount = 0;
-
-	while (s[stringCount] != '\0')
-	{	
-		leetCount = 0;
-
-		while (leetCount < 10)
+	for (i = 0; s[i] != '\0'; i++)
+	{
+		for (j = 0; subs[j] != '\0'; j++)
 		{
-			if (leetLetters[leetCount] == s[stringCount])
-			{
-				s[stringCount] = leetNums[leetCount];
-			}
-			
-			leetCount++;
+			if (s[i] == subs[j])
+				s[i] = le[j / 2];
 		}
-		stringCount++;
 	}
+
 	return (s);
 }
