@@ -10,21 +10,13 @@
 
 char *_strncpy(char *dest, char *src, int n)
 {
-	int i;
+	int byteCount;
 
-	i = 0;
+	for (byteCount = 0; byteCount < n && src[byteCount] != '\0'; byteCount++)
+		dest[byteCount] = src[byteCount];
 
-	while (i < n && src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
+	for (; byteCount < n; byteCount++)
+		dest[byteCount] = '\0';
 
 	return (dest);
 }
