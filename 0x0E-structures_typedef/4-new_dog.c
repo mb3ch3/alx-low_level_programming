@@ -1,67 +1,64 @@
-#include "dog.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include "dog.h"
 
 /**
- * new_dog - check the code for Holberton School students.
- * @name: naming
- * @age: age number
- * @owner: ownership
- * Return: Always 0.
+ * new_dog - creates a new dog
+ * @name: str name
+ * @age: float age
+ * @owner: str owner's name
+ * Return: pointer to new dog
  */
 
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	int i = 0, j = 0, k;
+	struct dog *dogi;
 
-	dog_t *d;
-
-	while (name[i] != '\0')
-		i++;
-
-	while (owner[j] != '\0')
-		j++;
-
-	d = malloc(sizeof(dog_t));
-
-	if (d == NULL)
-	{
-		free(d);
-
-		return (NULL);
-	}
-
-	d->name = malloc(i *sizeof(d->name));
-
-	if (d->name == NULL)
-	{
-		free(d->name);
-
-		free(d);
-
-		return (NULL);
-	}
-
-	for (k = 0; k <= i; k++)
-		d->name[k] = name[k];
-
-	d->age = age;
-
-	d->owner = malloc(j *sizeof(d->owner));
-
-	if (d->owner == NULL)
-	{
-		free(d->owner);
-
-		free(d->name);
-
-		free(d);
+	int i, j, k;
 	
+	char *nCopy, *oCopy;
+
+	dogi = malloc(sizeof(struct dog));
+
+	if (dogi == NULL)
+		return (NULL);
+
+	for (i = 0; name[i] != '\0'; i++)
+		;
+
+	for (j = 0; owner[j] != '\0'; j++)
+		;
+
+	nCopy = malloc(sizeof(char) * i + 1);	/* store a copy of name */
+
+	if (nCopy == NULL)
+	{
+		free(dogi);
+
 		return (NULL);
 	}
+	
+	oCopy = malloc(sizeof(char) * j + 1); /* store a copy of owner */
+
+	if (oCopy == NULL)
+	{
+		free(nCopy);
+
+		free(dogi);
+
+		return (NULL);
+																		}
+	/* copy name and owner */
+	for (k = 0; k <= i; k++)
+		nCopy[k] = name[k];
 
 	for (k = 0; k <= j; k++)
-		d->owner[k] = owner[k];
+		oCopy[k] = owner[k];
+	
+	dogi->name = nCopy;
 
-	return (d);
+	dogi->age = age;
+
+	dogi->owner = oCopy;
+
+	return (dogi);
 }
