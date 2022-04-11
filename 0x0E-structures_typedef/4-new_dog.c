@@ -1,67 +1,81 @@
 #include "dog.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
- * new_dog - check the code for Holberton School students.
- * @name: naming
- * @age: age number
- * @owner: ownership
- * Return: Always 0.
+ * _strdup - returns a pointer to space in memory containing copy of string.
+ * @s: pointer to the string.
+ * Return: Pointer to a string stored in memory.
+ */
+
+char *_strdup(char *s)
+{
+	char *dup;
+
+	unsigned int i = 0;
+
+	unsigned int j = 0;
+
+	if (s == NULL)
+		return (NULL);
+
+	/*Get the length of the string.*/
+	while (s[i] != '\0')
+		i += 1;
+	
+	/*+1 to include the terminating character in size.*/
+	i++;
+
+	dup = malloc(i * sizeof(*dup));
+
+	if (dup == NULL)
+		return (NULL);
+
+	while (j < i)
+	{
+		dup[j] = s[j];
+		j++;
+	}
+
+	return (dup);
+}
+
+/**
+ *new_dog - create an instance of struct dog.
+ *@name:firt argument.
+ *@age:second argument.
+ *@owner: Third argument.
+ *Return: instance of struct.
  */
 
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	int i = 0, j = 0, k;
+	dog_t *newdog;
 
-	dog_t *d;
+	newdog = malloc(sizeof(struct dog));
 
-	while (name[i] != '\0')
-		i++;
+	if (newdog == NULL)
+		return (NULL);
 
-	while (owner[j] != '\0')
-		j++;
+	/*Assign name element of new struct to the copy of name.*/
 
-	d = malloc(sizeof(dog_t));
+	newdog->name = _strdup(name);
 
-	if (d == NULL)
+	if (newdog->name == NULL)
 	{
-		free(d);
-
+		free(newdog);
 		return (NULL);
 	}
 
-	d->name = malloc(i *sizeof(d->name));
+	/*Assgin owner element of new struct to the copy of ownwer.*/
+	newdog->owner = _strdup(owner);
 
-	if (d->name == NULL)
+	if (newdog->owner == NULL)
 	{
-		free(d->name);
-
-		free(d);
-
+		free(newdog->name);
+		free(newdog);
 		return (NULL);
 	}
 
-	for (k = 0; k <= i; k++)
-		d->name[k] = name[k];
-	
-	d->age = age;
+	newdog->age = age;
 
-	d->owner = malloc(j *sizeof(d->owner));
-
-	if (d->owner == NULL)
-	{
-		free(d->owner);
-
-		free(d->name);
-
-		free(d);
-
-		return (NULL);
-	}
-
-	for (k = 0; k <= j; k++)
-		d->owner[k] = owner[k];
-
-	return (d);
+	return (newdog);
 }
