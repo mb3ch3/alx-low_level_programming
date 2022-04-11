@@ -14,7 +14,7 @@ dog_t *new_dog(char *name, float age, char *owner)
 	struct dog *dogi;
 
 	int i, j, k;
-	
+
 	char *nCopy, *oCopy;
 
 	dogi = malloc(sizeof(struct dog));
@@ -36,7 +36,7 @@ dog_t *new_dog(char *name, float age, char *owner)
 
 		return (NULL);
 	}
-	
+
 	oCopy = malloc(sizeof(char) * j + 1); /* store a copy of owner */
 
 	if (oCopy == NULL)
@@ -46,14 +46,15 @@ dog_t *new_dog(char *name, float age, char *owner)
 		free(dogi);
 
 		return (NULL);
-																		}
+	}
+
 	/* copy name and owner */
 	for (k = 0; k <= i; k++)
 		nCopy[k] = name[k];
 
 	for (k = 0; k <= j; k++)
 		oCopy[k] = owner[k];
-	
+
 	dogi->name = nCopy;
 
 	dogi->age = age;
