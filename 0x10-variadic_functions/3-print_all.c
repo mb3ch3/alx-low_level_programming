@@ -46,9 +46,7 @@ void print_all(const char * const format, ...)
 			break; }
 			printf("%p", p);
 			break; }
-		default:
-			j++;
-			continue;
+		j++;
 	}
 
 	printf("\n");
