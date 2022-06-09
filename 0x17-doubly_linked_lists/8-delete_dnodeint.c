@@ -1,43 +1,42 @@
 #include "lists.h"
 
 /**
- * delete_dnodeint_at_index - delete node at specific index
- * @head: head of linked list
- * @index: index of node to delete
+ * delete_dnodeint_at_index - Deletes the node at given index of a list
+ * @head: Memory address of the linked list
+ * @index: Index of the list to search
+ *
  * Return: 1 on success, -1 on failure
  */
-
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-	dlistint_t *current;
+	dlistint_t *temp = *head, *prev = NULL;
+	unsigned int i = 0;
 
-	if (head == NULL)
+	if (head == NULL || temp == NULL)
 		return (-1);
 
-	current = *head;
+	if (index == 0)
+	{
+		if (temp->next != NULL)
+			temp->next->prev = NULL;
+		*head = temp->next;
+		free(temp);
+		return (1);
+	}
 
-	if (current == NULL)
+	while (temp != NULL && i != index)
+	{
+		prev = temp;
+		temp = temp->next;
+		i++;
+	}
+	if (temp == NULL)
 		return (-1);
 
-	while (index != 0)
-	{
-		current = current->next;
-		index--;
-		if (current == NULL)
-			return (-1);
-	}
-
-	if (current->prev != NULL)
-		current->prev->next = current->next;
-	else
-	{
-		*head = current->next;
-		if (current->next != NULL)
-			current->next->prev = NULL;
-		free(current);
-	}
+	prev->next = temp->next;
+	if (temp->next != NULL)
+		temp->next->prev = prev;
+	free(temp);
 
 	return (1);
 }
-
-
