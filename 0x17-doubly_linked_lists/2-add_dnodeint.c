@@ -1,29 +1,23 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include <string.h>
 #include "lists.h"
+
 /**
- *add_dnodeint - print list
- *@head: list
- *@n: data
- *Return: number elements.
+ * add_dnodeint - adds a new node at the beginning of a dlistint_t list
+ * @head: double pointer to head of list
+ * @n: value of node
+ * Return: pointer of node that has been added
  */
 dlistint_t *add_dnodeint(dlistint_t **head, const int n)
 {
-	dlistint_t *new_head = malloc(sizeof(dlistint_t));
+	dlistint_t *new_node = malloc(sizeof(dlistint_t));
 
-	if (new_head == NULL)
-	{
-		free(new_head);
+	if (!new_node)
 		return (NULL);
-	}
-	new_head->n = n;
-	new_head->next = *head;
-	new_head->prev = NULL;
-	if (*head != NULL)
-	{
-		(*head)->prev = new_head;
-	}
-	*head = new_head;
-	return (new_head);
+
+	new_node->n = n, new_node->prev = NULL, new_node->next = *head;
+	if (*head)
+		(*head)->prev = new_node;
+	*head = new_node;
+
+	return (new_node);
+
 }
