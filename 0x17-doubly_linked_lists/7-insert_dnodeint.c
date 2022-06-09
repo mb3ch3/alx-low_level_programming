@@ -1,54 +1,39 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include <string.h>
 #include "lists.h"
+
 /**
- *insert_dnodeint_at_index - insert at index
- *@h: head
- *@idx: index
- *@n: data
- *Return: address.
+ * insert_dnodeint_at_index - inserts a new node at a given position
+ * @h: double pointer to head of list
+ * @idx: index to insert node
+ * @n: number of node added
+ * Return: node inserted
  */
+
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	unsigned int i = 0;
-	dlistint_t *new_head = malloc(sizeof(dlistint_t));
-	dlistint_t *tmp = *h;
-	dlistint_t *chekernull = *h;
+	dlistint_t *tmp = *h, *new;
 
-	if (h == NULL)
-		return (0);
-	if (new_head == NULL)
-	{ free(new_head);
-		return (0); }
-	if (idx > 0)
+	if (idx == 0)
+		return (add_dnodeint(h, n));
+
+	for (; idx != 1; idx--)
 	{
-		for (i = 0 ; i < idx ; i++)
-		{
-			if (chekernull->next == NULL)
-			{
-				return (NULL);
-			}
-			if ((i + 1) == idx)
-			{
-				new_head->n = n;
-				new_head->next = (tmp)->next;
-				new_head->prev = tmp;
-				(tmp)->next = new_head;
-				if (tmp != NULL)
-					tmp->prev = new_head;
-				return (new_head);
-			}
-			tmp = (tmp)->next;
-		}
+		tmp = tmp->next;
+		if (tmp == NULL)
+			return (NULL);
 	}
-	else if (idx == 0)
-	{ new_head->n = n;
-		new_head->next = (tmp);
-		new_head->prev = NULL;
-		if (*h != NULL)
-			(*h)->prev = new_head;
-		(*h) = new_head;
-		return (new_head); }
-	return (NULL);
+
+	if (tmp->next == NULL)
+		return (add_dnodeint_end(h, n));
+
+	new = malloc(sizeof(dlistint_t));
+	if (new == NULL)
+		return (NULL);
+
+	new->n = n;
+	new->prev = tmp;
+	new->next = tmp->next;
+	tmp->next->prev = new;
+	tmp->next = new;
+
+	return (new);
 }
