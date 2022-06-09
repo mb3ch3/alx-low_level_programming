@@ -1,36 +1,37 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include <string.h>
 #include "lists.h"
+
 /**
- *add_dnodeint_end - put new end
- *@head: head
- *@n: data.
- *Return: address.
+ * add_dnodeint_end - adds node to end of doubly linked list
+ * @head: pointer to head of list
+ * @n: integer value of node
+ * Return: pointer to node added
  */
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
-	dlistint_t *new_tail = malloc(sizeof(dlistint_t));
-	dlistint_t *fast_iter = *head;
+	dlistint_t *newNode;
+	dlistint_t *current = *head;
 
-	if (new_tail == NULL)
+	newNode = malloc(sizeof(dlistint_t));
+	if (!newNode)
 	{
-		free(new_tail);
-		return (0);
+		dprintf(2, "Error: Can't malloc\n");
+		return (NULL);
 	}
-	new_tail->n = n;
-	new_tail->next = NULL;
-	if (*head == NULL)
+	newNode->n = n;
+	newNode->next = NULL;
+
+	if (!current)
 	{
-		new_tail->prev = NULL;
-		*head = new_tail;
-		return (*head);
+		newNode->prev = NULL;
+		*head = newNode;
+		return (newNode);
 	}
-	while (fast_iter->next != NULL)
+
+	while (current->next)
 	{
-		fast_iter = fast_iter->next;
+		current = current->next;
 	}
-	fast_iter->next = new_tail;
-	new_tail->prev = fast_iter;
-	return (*head);
+	current->next = newNode;
+	newNode->prev = current;
+	return (newNode);
 }
