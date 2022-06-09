@@ -1,20 +1,16 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include <string.h>
 #include "lists.h"
+
 /**
- *dlistint_len - print lenght list
- *@h: list
- *Return: number elements.
+ * dlistint_len - the number of elements in a linked dlistint_t list
+ * @h: pointer to head of list
+ * Return: number of nodes
  */
 size_t dlistint_len(const dlistint_t *h)
 {
-	int i = 0;
+	const dlistint_t *current = h;
+	size_t size = 0;
 
-	while (h != NULL)
-	{
-		h = h->next;
-		i++;
-	}
-	return (i);
+	while (current)
+		size++, current = current->next;
+	return (size);
 }
